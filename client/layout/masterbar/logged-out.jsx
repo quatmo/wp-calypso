@@ -21,6 +21,7 @@ import WordPressWordmark from 'components/wordpress-wordmark';
 import { addQueryArgs } from 'lib/route';
 import { getCurrentQueryArguments, getCurrentRoute } from 'state/selectors';
 import { login } from 'lib/paths';
+import flows from 'signup/config/flows';
 
 class MasterbarLoggedOut extends PureComponent {
 	static propTypes = {
@@ -75,6 +76,7 @@ class MasterbarLoggedOut extends PureComponent {
 
 	renderSignupItem() {
 		const { currentQuery, currentRoute, sectionName, translate } = this.props;
+		const signupFlow = get( currentQuery, 'signup_flow' );
 
 		// Hide for some sections
 		if ( includes( [ 'signup', 'jetpack-onboarding' ], sectionName ) ) {
@@ -118,6 +120,8 @@ class MasterbarLoggedOut extends PureComponent {
 			}
 		} else if ( 'jetpack-connect' === sectionName ) {
 			signupUrl = '/jetpack/new';
+		} else if ( signupFlow && flows.isValidFlow( signupFlow ) ) {
+			signupUrl += '/' + signupFlow;
 		}
 
 		return (
