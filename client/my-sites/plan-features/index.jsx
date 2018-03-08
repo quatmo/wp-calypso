@@ -780,7 +780,7 @@ export default connect(
 			} )
 		);
 
-		if ( isInSignup && abtest( 'minimizeFreePlan' ) === 'minimized' ) {
+		if ( isInSignup && abtest( 'minimizeFreePlanV2' ) === 'minimized' ) {
 			freePlanProperties = filter( planProperties, filterFreePlan );
 			freePlanProperties = freePlanProperties[ 0 ] || null;
 			planProperties = reject( planProperties, filterFreePlan );
